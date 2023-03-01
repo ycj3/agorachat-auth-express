@@ -31,10 +31,10 @@ app.post('/login', async (req, res) => {
     res
       .status(200)
       .json({
-        id: user.id,
-        account: user.account,
+        code: "RES_OK",
+        expireTimestamp: expirationInSeconds,
         chatUsername: user.chatUsername,
-        agorachatAuthToken: userToken
+        accessToken: userToken // agorachatAuthToken
       })
   } else {
     res.status(401).json({
@@ -77,7 +77,7 @@ app.post('/register', async (req, res) => {
       "chatUsername": chatUsername,
       "userUuid": result.entities[0].uuid
     })
-    res.status(201).json({ success: true, data: user,message: "User Registered Sucessfully !" })
+    res.status(200).json({ success: true, message: "User Registered Sucessfully !", "code": "RES_OK" })
   } catch (error) {
     console.log(error)
     res.status(400).json({ success: false })
