@@ -3,6 +3,7 @@ This is an simple Express app, which was integrated AgoraChat's authentication.
 
 There are two endpoints for  `registering` and `logining` the user into your app. Authentication workflow refer [here](https://medium.com/@carlsonyuandev/authentication-server-for-agorachat-sequence-diagrams-da4c2992d2aa)
 
+https://user-images.githubusercontent.com/123744402/223958992-b2d95987-fcac-4763-95dc-3db0d4c4d8df.mov
 
 ## Usage
 ### Fill in with your information
