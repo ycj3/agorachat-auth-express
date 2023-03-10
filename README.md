@@ -5,7 +5,9 @@ Agora Advanced Guide: [Secure authentication with tokens](https://docs.agora.io/
 Authentication workflow refer to this [sequence diagram](https://medium.com/@carlsonyuandev/authentication-server-for-agorachat-sequence-diagrams-da4c2992d2aa)
 
 This video below shows how it works:
+
 https://user-images.githubusercontent.com/123744402/223958992-b2d95987-fcac-4763-95dc-3db0d4c4d8df.mov
+
 ## Components
 * agora-token
 * express
