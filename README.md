@@ -1,9 +1,17 @@
 ## Introduction
-This is an simple Express app, which was integrated AgoraChat's authentication.  
+Written in Node.js, using [express framework](https://www.npmjs.com/package/express) to create a RESTful webservice for generating user tokens for user with the [Agora's Chat SDK](https://www.agora.io/en/products/chat/).
 
-There are two endpoints for  `registering` and `logining` the user into your app. Authentication workflow refer [here](https://medium.com/@carlsonyuandev/authentication-server-for-agorachat-sequence-diagrams-da4c2992d2aa)
+Agora Advanced Guide: [Secure authentication with tokens](https://docs.agora.io/en/agora-chat/develop/authentication)  
+Authentication workflow refer to this [sequence diagram](https://medium.com/@carlsonyuandev/authentication-server-for-agorachat-sequence-diagrams-da4c2992d2aa)
 
 https://user-images.githubusercontent.com/123744402/223958992-b2d95987-fcac-4763-95dc-3db0d4c4d8df.mov
+## Components
+* agora-token
+* express
+* mongodb-memory-server
+* mongoose
+
+**Note That**: This project use `mongodb-memory-server` package which holds the data in memory for demonstrating data storage. However, you should use your own database of your backend server for storing data.
 
 ## Usage
 ### Fill in with your information
