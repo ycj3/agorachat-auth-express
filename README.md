@@ -1,12 +1,10 @@
-## Introduction
-Written in Node.js, using [express framework](https://www.npmjs.com/package/express) to create a RESTful webservice for generating user tokens for user with the [Agora's Chat SDK](https://www.agora.io/en/products/chat/).
+# AgoraChat Auth express WebServer
+Written in Node.js, using `express` framework to create a RESTful webservice for generating user tokens for user with the AgoraChat's [Chat SDK](https://www.agora.io/en/products/chat/).
 
-Agora Advanced Guide: [Secure authentication with tokens](https://docs.agora.io/en/agora-chat/develop/authentication)  
-Authentication workflow refer to this [sequence diagram](https://medium.com/@carlsonyuandev/authentication-server-for-agorachat-sequence-diagrams-da4c2992d2aa)
+- Agora Advanced Guide: [Secure authentication with tokens](https://docs.agora.io/en/agora-chat/develop/authentication).  
+- Authentication workflow refer to this [sequence diagram](https://medium.com/@carlsonyuandev/authentication-server-for-agorachat-sequence-diagrams-da4c2992d2aa).
 
-This video below shows how it works:
-
-https://user-images.githubusercontent.com/123744402/223958992-b2d95987-fcac-4763-95dc-3db0d4c4d8df.mov
+If something doesn't work, please [file an issue](https://github.com/CarlsonYuan/agorachat-auth-express/issues/new).<br>
 
 ## Components
 * agora-token
