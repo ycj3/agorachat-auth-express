@@ -34,7 +34,8 @@ app.post('/login', async (req, res) => {
         code: "RES_OK",
         expireTimestamp: expirationInSeconds,
         chatUsername: user.chatUsername,
-        accessToken: userToken // agorachatAuthToken
+        accessToken: userToken, // agorachatAuthToken
+        agoraUid: Math.floor(Math.random() * 1000 + 10000) // Returns a random integer from 10000 to 11000:
       })
   } else {
     res.status(401).json({
