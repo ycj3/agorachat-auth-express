@@ -23,7 +23,7 @@ const chatRegisterURL = "https://<YOUR RestApiHost>/<YOUR OrgName>/<YOUR AppName
 app.use(cors())
 app.use(express.json())
 
-app.post('/login', async (req, res) => {
+app.post('/app/chat/user/login', async (req, res) => {
   await dbConnect()
   const user = await User.findOne({account: req.body.account})
   if (user) {
@@ -44,7 +44,7 @@ app.post('/login', async (req, res) => {
   }
 })
 
-app.post('/register', async (req, res) => {
+app.post('/app/chat/user/register', async (req, res) => {
 
   await dbConnect()
   const account = req.body.account

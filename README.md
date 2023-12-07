@@ -54,13 +54,7 @@ npm run start
 
 ### Register
 ```curl
-curl --request POST \
-  --url http://localhost:3000/register \
-  --header 'Content-Type: application/json' \
-  --data '{
- "account": "wukong",
- "password": "1"
-}'
+curl -H 'Content-Type: application/json' -d '{ "account": "demo_user_1", "password": "1"}' http://localhost:3000/app/chat/user/register
 ```
 Response Example
 ```json
@@ -73,21 +67,16 @@ Response Example
 
 ### Login
 ```curl
-curl --request POST \
-  --url http://localhost:3000/login \
-  --header 'Content-Type: application/json' \
-  --data '{
- "account": "wukong",
- "password": "1"
-}'
+curl -H 'Content-Type: application/json' -d '{ "account": "demo_user_1", "password": "1"}' http://localhost:3000/app/chat/user/login
 ```
 Response Example
 ```json
 {
   "code": "RES_OK",
   "expireTimestamp": 86400,
-  "chatUsername": "wukong",
-  "accessToken": "007eJxTYHjw+fPKcN8NUtcSo8wOXk+VeOAgtP+DecyF46ov5uldyZdXYDBKTTU2sbBISzMxMDVJNTWzME02NjJJtEiyNDFKtTQ2WKnwP7khkJHhzoEYFkYGVgZGIATxVRhSE01SE9MsDXSTLAzNdA0NU1N0k9KMzHVNU5ITjVMsk5IskpMBNV4qBg=="
+  "chatUsername": "demo_user_1",
+  "accessToken": "007eJxTYFga4RbIW1AnWP9vkWKKXk/2zfL095q757GqTvidonArdKUCQ0qycUqyeWqigVmKhYmFabJlspFZqnlSYoqBiYV5krEJa39BakMgI8PrqHUMjAysQMzIAOKrMCSaJgM1phnoWpqYWOoaGqam6loYpBjrJpqnGCQmGaaYmqcZAQAd5ycF",
+  "agoraUid": 10764
 }
 
 ```
