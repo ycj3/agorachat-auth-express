@@ -8,7 +8,7 @@ const appCertificate = "<YOUR APP CERTIFICATE>";
 const expirationInSeconds = 86400;
 
 // Get the RestApiHost, OrgName and AppName from the chat feature in agora console
-const chatRegisterURL = "https://<YOUR RestApiHost>/<YOUR OrgName>/<YOUR AppName>/users"
+const baseURLUsers = "https://<YOUR RestApiHost>/<YOUR OrgName>/<YOUR AppName>/users"
 
 export {
     hostname,
@@ -16,5 +16,5 @@ export {
     appId,
     appCertificate,
     expirationInSeconds,
-    chatRegisterURL
+    baseURLUsers
 }
