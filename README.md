@@ -1,29 +1,10 @@
 # AgoraChat Auth express WebServer
-Written in Node.js, using `express` framework to create a RESTful webservice for generating user tokens for user with the AgoraChat's [Chat SDK](https://www.agora.io/en/products/chat/).
-
+Written in Node.js, using `express` framework to create a RESTful webservice for generating user tokens
 > This project use `mongodb-memory-server` package which holds the data in memory for demonstrating data storage. However, you should use your own database of your backend server for storing data.<br>
-
-If something doesn't work, please [file an issue](https://github.com/CarlsonYuan/agorachat-auth-express/issues/new).<br>
-
-## Core Code
-> **Warning**  
-> Need to use npm package `agora-token`. `agora-access-token` is now deprecated. refer to AgoraIO Tools [issues](https://github.com/AgoraIO/Tools/issues/324).
-```
-import agoraToken from 'agora-token'
-const appToken = ChatTokenBuilder.buildAppToken(appId, appCertificate, expirationInSeconds);
-```
-> **Warning**  
-> Need to use `user's uuid` (generated from Chat Rest Register User [API](https://docs.agora.io/en/agora-chat/restful-api/user-system-registration?platform=android#registering-a-user)) not `user's id`. refer to Agora [doc](https://docs.agora.io/en/agora-chat/develop/authentication?platform=android)
-```
-const userToken = ChatTokenBuilder.buildUserToken(appId, appCertificate, <user's uuid>, expirationInSeconds);
-```
-
-
-
 
 ## Usage
 ### Fill in with your information
-Open *auth-demo.js* and replace `<YOUR APP ID>` and `<YOUR APP CERTIFICATE>` with your value.  
+Open *constants.js* and replace `<YOUR APP ID>` and `<YOUR APP CERTIFICATE>` with your value.  
 And also replace `<YOUR RestApiHost>`, `<YOUR OrgName>` and `<YOUR AppName>`.  
 
 ```
@@ -80,3 +61,19 @@ Response Example
 }
 
 ```
+
+## Core Code
+> **Warning**  
+> Need to use npm package `agora-token`. `agora-access-token` is now deprecated. refer to AgoraIO Tools [issues](https://github.com/AgoraIO/Tools/issues/324).
+```
+import agoraToken from 'agora-token'
+const appToken = ChatTokenBuilder.buildAppToken(appId, appCertificate, expirationInSeconds);
+```
+> **Warning**  
+> Need to use `user's uuid` (generated from Chat Rest Register User [API](https://docs.agora.io/en/agora-chat/restful-api/user-system-registration?platform=android#registering-a-user)) not `user's id`. refer to Agora [doc](https://docs.agora.io/en/agora-chat/develop/authentication?platform=android)
+```
+const userToken = ChatTokenBuilder.buildUserToken(appId, appCertificate, <user's uuid>, expirationInSeconds);
+```
+
+## Feedback
+If something doesn't work, please [file an issue](https://github.com/CarlsonYuan/agorachat-auth-express/issues/new).<br>
