@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const UserSchema = new mongoose.Schema({
   userAccount: String,
   userPassword: String,
-  chatUsername: String,
+  chatUserName: String,
   userUuid: String
 })
 

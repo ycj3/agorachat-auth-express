@@ -24,7 +24,7 @@ app.post('/app/chat/user/login', async (req, res) => {
       .json({
         code: "RES_OK",
         expireTimestamp: expirationInSeconds,
-        chatUsername: chatUid,
+        chatUserName: chatUid,
         accessToken: userToken, // agorachatAuthToken
         agoraUid: Math.floor(Math.random() * 1000 + 10000) // Returns a random integer from 10000 to 11000:
       })
@@ -48,7 +48,7 @@ async function getUserFromCache(chatUid) {
   // Store user in cache for future use
   user = await User.create({
     "userAccount": chatUid,
-    "chatUsername": chatUid,
+    "chatUserName": chatUid,
     "userUuid": chatUuid
   })
 
@@ -78,14 +78,14 @@ app.post('/app/chat/user/register', async (req, res) => {
   await dbConnect()
   const userAccount = req.body.userAccount
   const userPassword = req.body.userPassword
-  // const chatUsername = "<User-defined username>"
+  // const chatUserName = "<User-defined username>"
   // const chatPassword = "<User-defined password>"
   // const ChatNickname = "<User-defined nickname>"
-  const chatUsername = userAccount
+  const chatUserName = userAccount
   const chatPassword = userPassword
   const ChatNickname = userAccount
   
-  const body = {'username': chatUsername, 'password': chatPassword, 'nickname': ChatNickname};
+  const body = {'username': chatUserName, 'password': chatPassword, 'nickname': ChatNickname};
   const appToken = ChatTokenBuilder.buildAppToken(appId, appCertificate, expirationInSeconds);
   const response = await fetch(baseURLUsers , {
     method: 'post',
@@ -104,7 +104,7 @@ app.post('/app/chat/user/register', async (req, res) => {
     await User.create({
       "userAccount": userAccount,
       "userPassword": userPassword,
-      "chatUsername": chatUsername,
+      "chatUserName": chatUserName,
       "userUuid": result.entities[0].uuid
     })
     res.status(200).json({ success: true, message: "User Registered Sucessfully !", "code": "RES_OK" })

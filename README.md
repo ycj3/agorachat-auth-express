@@ -55,7 +55,7 @@ Response Example
 {
   "code": "RES_OK",
   "expireTimestamp": 86400,
-  "chatUsername": "demo_user_1",
+  "chatUserName": "demo_user_1",
   "accessToken": "007eJxTYFga4RbIW1AnWP9vkWKKXk/2zfL095q757GqTvidonArdKUCQ0qycUqyeWqigVmKhYmFabJlspFZqnlSYoqBiYV5krEJa39BakMgI8PrqHUMjAysQMzIAOKrMCSaJgM1phnoWpqYWOoaGqam6loYpBjrJpqnGCQmGaaYmqcZAQAd5ycF",
   "agoraUid": 10764
 }
