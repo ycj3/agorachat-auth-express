@@ -15,7 +15,7 @@ app.use(cors())
 app.use(express.json())
 
 app.post('/app/chat/user/login', async (req, res) => {
-  const chatUid = req.body.account
+  const chatUid = req.body.userAccount
   const user = await getUserFromCache(chatUid)
   if (user) {
     const userToken = ChatTokenBuilder.buildUserToken(appId, appCertificate, user.userUuid, expirationInSeconds);
@@ -30,14 +30,14 @@ app.post('/app/chat/user/login', async (req, res) => {
       })
   } else {
     res.status(401).json({
-      message: 'Your account does not exist, please register first'
+      message: 'Your userAccount does not exist, please register first'
     })
   }
 })
 
 async function getUserFromCache(chatUid) {
   await dbConnect()
-  var user = await User.findOne({account: chatUid})
+  var user = await User.findOne({userAccount: chatUid})
   if (user) {
     return user
   }
@@ -47,7 +47,7 @@ async function getUserFromCache(chatUid) {
 
   // Store user in cache for future use
   user = await User.create({
-    "account": chatUid,
+    "userAccount": chatUid,
     "chatUsername": chatUid,
     "userUuid": chatUuid
   })
@@ -76,14 +76,14 @@ async function fetchUserFromChatServer(chatUid){
 app.post('/app/chat/user/register', async (req, res) => {
 
   await dbConnect()
-  const account = req.body.account
-  const password = req.body.password
+  const userAccount = req.body.userAccount
+  const userPassword = req.body.userPassword
   // const chatUsername = "<User-defined username>"
   // const chatPassword = "<User-defined password>"
   // const ChatNickname = "<User-defined nickname>"
-  const chatUsername = account
-  const chatPassword = password
-  const ChatNickname = account
+  const chatUsername = userAccount
+  const chatPassword = userPassword
+  const ChatNickname = userAccount
   
   const body = {'username': chatUsername, 'password': chatPassword, 'nickname': ChatNickname};
   const appToken = ChatTokenBuilder.buildAppToken(appId, appCertificate, expirationInSeconds);
@@ -102,8 +102,8 @@ app.post('/app/chat/user/register', async (req, res) => {
   }
   try {
     await User.create({
-      "account": account,
-      "password": password,
+      "userAccount": userAccount,
+      "userPassword": userPassword,
       "chatUsername": chatUsername,
       "userUuid": result.entities[0].uuid
     })

@@ -35,7 +35,7 @@ npm run start
 
 ### Register
 ```curl
-curl -H 'Content-Type: application/json' -d '{ "account": "demo_user_1", "password": "1"}' http://localhost:3000/app/chat/user/register
+curl -H 'Content-Type: application/json' -d '{ "userAccount": "demo_user_1", "userPassword": "1"}' http://localhost:3000/app/chat/user/register
 ```
 Response Example
 ```json
@@ -48,7 +48,7 @@ Response Example
 
 ### Login
 ```curl
-curl -H 'Content-Type: application/json' -d '{ "account": "demo_user_1", "password": "1"}' http://localhost:3000/app/chat/user/login
+curl -H 'Content-Type: application/json' -d '{ "userAccount": "demo_user_1", "userPassword": "1"}' http://localhost:3000/app/chat/user/login
 ```
 Response Example
 ```json
