@@ -19,6 +19,7 @@ app.post('/app/chat/user/login', async (req, res) => {
   const user = await getUserFromCache(chatUid)
   if (user) {
     const userToken = ChatTokenBuilder.buildUserToken(appId, appCertificate, user.userUuid, expirationInSeconds);
+    var randomInter = Math.floor(Math.random() * 1000 + 10000)
     res
       .status(200)
       .json({
@@ -26,7 +27,7 @@ app.post('/app/chat/user/login', async (req, res) => {
         expireTimestamp: expirationInSeconds,
         chatUserName: chatUid,
         accessToken: userToken, // agorachatAuthToken
-        agoraUid: Math.floor(Math.random() * 1000 + 10000) // Returns a random integer from 10000 to 11000:
+        agoraUid: randomInter + ''
       })
   } else {
     res.status(401).json({
