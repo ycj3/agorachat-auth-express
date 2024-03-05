@@ -1,20 +1,11 @@
-
-import express from 'express'
-const app = express()
-import fetch from 'node-fetch'
-import cors from 'cors'
 import agoraToken from 'agora-token'
-import User from './models/User'
-import dbConnect from './utils/dbConnect'
+import User from '../models/User'
+import fetch from 'node-fetch';
 
 const { ChatTokenBuilder } = agoraToken
-import { hostname,port,appId,appCertificate,expirationInSeconds,baseURLUsers } from './constants.js';
+import { appId,appCertificate,expirationInSeconds,baseURLUsers } from '../constants.js';
 
-
-app.use(cors())
-app.use(express.json())
-
-app.post('/app/chat/user/login', async (req, res) => {
+export const loginUser = async (req, res) => {
   const chatUid = req.body.userAccount
   const user = await getUserFromCache(chatUid)
   if (user) {
@@ -34,49 +25,9 @@ app.post('/app/chat/user/login', async (req, res) => {
       message: 'Your userAccount does not exist, please register first'
     })
   }
-})
-
-async function getUserFromCache(chatUid) {
-  await dbConnect()
-  var user = await User.findOne({userAccount: chatUid})
-  if (user) {
-    return user
-  }
-  // If user is not in cache, fetch it from the chat server
-  const chatUuid = await fetchUserFromChatServer(chatUid);
-  if (chatUuid == null) return null
-
-  // Store user in cache for future use
-  user = await User.create({
-    "userAccount": chatUid,
-    "chatUserName": chatUid,
-    "userUuid": chatUuid
-  })
-
-  return user;
 }
+export const registerUser = async (req, res) => {
 
-// query user from chat server
-async function fetchUserFromChatServer(chatUid){
-  console.log(chatUid)
-  const appToken = ChatTokenBuilder.buildAppToken(appId, appCertificate, expirationInSeconds);
-  const response = await fetch(baseURLUsers + "/" + chatUid, {
-    method: 'get',
-    headers: {
-      'content-type': 'application/json',
-      'Authorization': 'Bearer '+appToken,
-    }
-  })
-  if (response.status != 200 ) {
-    return null
-  }
-  const result = await response.json()
-  return result.entities[0].uuid
-}
-
-app.post('/app/chat/user/register', async (req, res) => {
-
-  await dbConnect()
   const userAccount = req.body.userAccount
   const userPassword = req.body.userPassword
   // const chatUserName = "<User-defined username>"
@@ -113,9 +64,44 @@ app.post('/app/chat/user/register', async (req, res) => {
     console.log(error)
     res.status(400).json({ success: false })
   }
+}
 
-})
+async function getUserFromCache(chatUid) {
+  var user = await User.findOne({userAccount: chatUid})
+  if (user) {
+    return user
+  }
+  // If user is not in cache, fetch it from the chat server
+  const chatUuid = await fetchUserFromChatServer(chatUid);
+  if (chatUuid == null) return null
 
-app.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+  // Store user in cache for future use
+  user = await User.create({
+    "userAccount": chatUid,
+    "chatUserName": chatUid,
+    "userUuid": chatUuid
+  })
+
+  return user;
+}
+
+// query user from chat server
+async function fetchUserFromChatServer(chatUid){
+  console.log(chatUid)
+  const appToken = ChatTokenBuilder.buildAppToken(appId, appCertificate, expirationInSeconds);
+  const response = await fetch(baseURLUsers + "/" + chatUid, {
+    method: 'get',
+    headers: {
+      'content-type': 'application/json',
+      'Authorization': 'Bearer '+appToken,
+    }
+  })
+  if (response.status != 200 ) {
+    return null
+  }
+  const result = await response.json()
+  return result.entities[0].uuid
+}
+
+
+

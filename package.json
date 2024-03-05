@@ -2,9 +2,9 @@
     "name": "agorachat-auth-express",
     "version": "1.0.0",
     "description": "",
-    "main": "auth-demo.js",
+    "main": "app.js",
     "scripts": {
-        "start": "node --experimental-specifier-resolution=node auth-demo.js"
+        "start": "node --experimental-specifier-resolution=node app.js"
     },
     "dependencies": {
         "agora-token": "^2.0.2",
