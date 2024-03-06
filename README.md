@@ -1,13 +1,24 @@
 # AgoraChat Auth express WebServer
-A Simple Auth Server with the [Register](#register) and [login](#login) endpoint for AgoraChat App Demo([web](https://github.com/AgoraIO-Usecase/AgoraChat-web), [iOS](https://github.com/AgoraIO-Usecase/AgoraChat-ios), [android](https://github.com/AgoraIO-Usecase/AgoraChat-android)) using.
+A Simple Auth Server for AgoraChat App Demo([web](https://github.com/AgoraIO-Usecase/AgoraChat-web), [iOS](https://github.com/AgoraIO-Usecase/AgoraChat-ios), [android](https://github.com/AgoraIO-Usecase/AgoraChat-android)) using.
 > This project use `mongodb-memory-server` package which holds the data in memory for demonstrating data storage. However, you should use your own database of your backend server for storing data.<br>
 
-## Usage
-### Fill in with your information
-Open *constants.js* and replace `<YOUR APP ID>` and `<YOUR APP CERTIFICATE>` with your value.  
-And also replace `<YOUR RestApiHost>`, `<YOUR OrgName>` and `<YOUR AppName>`.  
+## Getting Started
 
+### Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/CarlsonYuan/agorachat-auth-express.git
+cd agorachat-auth-express
+npm install
 ```
+
+## Configuration 
+
+Configure the application by updating the `constants.js` file with your Agora credentials and any other required settings.
+
+```js
 // Get the appId and appCertificate from the agora console
 const appId = "<YOUR APP ID>";
 
@@ -20,67 +31,89 @@ const expirationInSeconds = 86400;
 const chatRegisterURL = "https://<YOUR RestApiHost>/<YOUR OrgName>/<YOUR AppName>/users"
 ```
 
-### Install Dependencies and Run
+## Usage
 
-Install Dependencies
-```shell
-npm install
-```
-run the app
-```shell
+Start the server:
+
+```bash
 npm run start
 ```
 
-## Test with CURL
-* register endpoint 
+The server will run at http://localhost:3000 by default.
+
+## API Endpoints
+
+- POST /app/chat/user/register:  
+```bash
+# Register a new user
+curl -X POST \
+  -H 'Content-Type: application/json' \
+  -d '{"userAccount": "{{your_username}}", "userPassword": "{{your_password}}"}' \
+  http://localhost:3000/app/chat/user/register
+
+# Sample Response:
+# {
+#   "success": true,
+#   "message": "User Registered Successfully!",
+#   "code": "RES_OK"
+# }
 ```
-http://localhost:3000/app/chat/user/register
-```
-* login endpoint 
-```
-http://localhost:3000/app/chat/user/login
+
+- POST /app/chat/user/login:  
+```bash
+# Login a user and receive an authentication token.
+curl -X POST \
+  -H 'Content-Type: application/json' \
+  -d '{"userAccount": "{{your_username}}", "userPassword": "{{your_password}}"}' \
+  http://localhost:3000/app/chat/user/login
+
+# Sample Response:
+# {
+#   "code": "RES_OK",
+#   "expireTimestamp": 3600,
+#   "chatUserName": "{{your_username}}",
+#   "accessToken": "{{your_access_token}}",
+#   "agoraUid": "123456"
+# }
 ```
   
-### Register
-```curl
-curl http://localhost:3000/app/chat/user/register \
-        -H 'Content-Type: application/json' \
-        -d '{ "userAccount": "demo_user_1", "userPassword": "1"}'
-```
-Response Example
-```json
-{
-  "success": true,
-  "message": "User Registered Sucessfully !",
-  "code": "RES_OK"
-}
+- GET /token/rtc/channel/:channelName/agorauid/:agoraUid:  
+```bash
+# Generate an RTC token for a specific channel and user, and map user and agoraUid in local cache.
+curl "http://localhost:3000/token/rtc/channel/{{your_channel}}/agorauid/{{your_agora_uid}}?userAccount={{your_username}}"
+
+# Sample Response:
+# {
+#   "code": "RES_OK",
+#   "accessToken": "{{your_rtc_token}}",
+#   "expireTime": 3600,
+#   "agoraUid": "{{your_agora_uid}}"
+# }
 ```
 
-### Login
-```curl
-curl http://localhost:3000/app/chat/user/login \
-  -H 'Content-Type: application/json' \
-  -d '{ "userAccount": "demo_user_1", "userPassword": "1"}'
-```
-Response Example
-```json
-{
-  "code": "RES_OK",
-  "expireTimestamp": 86400,
-  "chatUserName": "demo_user_1",
-  "accessToken": "007eJxTYFxxxxxx5ycF",
-  "agoraUid": "10764"
-}
+- GET /agora/channel/mapper
+```bash 
+# Retrieve user-agoraUid mappings for a specific channel.
+curl "http://localhost:3000/agora/channel/mapper?channelName={{your_channel}}&userAccount={{your_username}}"
 
+# Sample Response:
+# {
+#   "code": "RES_OK",
+#   "channelName": "{{your_channel}}",
+#   "result": {
+#     "{{your_username}}": "{{agora_uid_1}}"
+#   }
+# }
 ```
+
 ## Using in App Demo
-### Web
+- Web
 <img width="1034" alt="image" src="https://github.com/CarlsonYuan/agorachat-auth-express/assets/123744402/0673e722-a97b-4159-872e-d8a31b52dd98">
 
-### iOS
+- iOS
 <img width="1349" alt="image" src="https://github.com/CarlsonYuan/agorachat-auth-express/assets/123744402/aed84925-29a0-4c71-b230-b6039eea0cef">
 
-### Android
+- Android
 <img width="1127" alt="image" src="https://github.com/CarlsonYuan/agorachat-auth-express/assets/123744402/38705bd1-d147-4e3f-af9b-09b6390b984c">
 
 
