@@ -10,12 +10,13 @@ export const loginUser = async (req, res) => {
   const user = await getUserFromCache(chatUid)
   if (user) {
     const userToken = ChatTokenBuilder.buildUserToken(appId, appCertificate, user.userUuid, expirationInSeconds);
+    const expireTimestamp = Date.now() + ( expirationInSeconds * 1000);
     var randomInter = Math.floor(Math.random() * 1000 + 10000)
     res
       .status(200)
       .json({
         code: "RES_OK",
-        expireTimestamp: expirationInSeconds,
+        expireTimestamp: expireTimestamp,
         chatUserName: chatUid,
         accessToken: userToken, // agorachatAuthToken
         agoraUid: randomInter + ''

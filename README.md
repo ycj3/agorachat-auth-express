@@ -70,7 +70,7 @@ curl -X POST \
 # Sample Response:
 # {
 #   "code": "RES_OK",
-#   "expireTimestamp": 3600,
+#   "expireTimestamp": 1712139512698,
 #   "chatUserName": "{{your_username}}",
 #   "accessToken": "{{your_access_token}}",
 #   "agoraUid": "123456"
